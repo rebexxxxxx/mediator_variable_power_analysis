@@ -50,7 +50,7 @@ server <- function(input, output) {
     # Execute model-specific power analysis code
     calc_power <- eventReactive(input$action, {
       out <- tryCatch(
-        {source(paste0("/Users/sansalerj/Desktop/mediator_variable_power_analysis/", input$modelInput, ".R"), local = TRUE)$value},
+        {source(paste0("./", input$modelInput, ".R"), local = TRUE)$value},
         error = function(e) {return(e$message)}
       )
     })
@@ -74,12 +74,12 @@ server <- function(input, output) {
     observeEvent(input$input_method, {
     if (input$input_method == "corr") {
       output$input_options <- renderUI({
-        source(paste0("/Users/sansalerj/Desktop/mediator_variable_power_analysis/", input$modelInput, "_correlations_ui.R"), local = TRUE)$value  
+        source(paste0("./", input$modelInput, "_correlations_ui.R"), local = TRUE)$value  
       })
     }
     if (input$input_method == "sc") {
       output$input_options <- renderUI({
-        source(paste0("/Users/sansalerj/Desktop/mediator_variable_power_analysis/", input$modelInput, "_sc_ui.R"), local = TRUE)$value  
+        source(paste0("./", input$modelInput, "_sc_ui.R"), local = TRUE)$value  
       })
     }
   })
